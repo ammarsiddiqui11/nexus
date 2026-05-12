@@ -135,13 +135,13 @@ const Contact = () => {
                 Prefer a quick call?
               </p>
               <p className="font-body text-xs text-[var(--color-text-secondary)] mb-4">
-                Book a free 30-minute consultation and let's talk through your project.
+                +91 8104244230
               </p>
               <a
-                href="#"
+                href="tel:+918104244230"
                 className="inline-flex items-center gap-2 font-mono text-xs text-[var(--color-accent-primary)] hover:gap-3 transition-all"
               >
-                Schedule a Call <FiArrowUpRight size={12} />
+                Give us a Call <FiArrowUpRight size={12} />
               </a>
             </div>
           </motion.div>

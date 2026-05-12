@@ -3,7 +3,7 @@ import { FiArrowUpRight, FiGithub, FiTwitter, FiLinkedin, FiInstagram } from 're
 const FOOTER_LINKS = {
   Services: ['Web Development', 'Web Applications', 'UI/UX Design', 'Backend Systems', 'SEO Optimization'],
   Company: ['About Us', 'Our Work', 'Process', 'Blog', 'Careers'],
-  Contact: ['hello@nexus.agency', '+1 (555) 000-0000', 'San Francisco, CA'],
+  Contact: ['hello@nexus.agency', '+91 8104244230', 'Mumbai, India'],
 }
 
 const SOCIALS = [

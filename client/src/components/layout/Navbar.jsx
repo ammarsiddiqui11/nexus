@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: 'About', href: '#about' },
   { label: 'Process', href: '#process' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Pricing', href: '#pricing' },
 ]
 
 const Navbar = () => {

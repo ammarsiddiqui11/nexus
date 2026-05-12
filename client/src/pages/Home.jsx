@@ -10,7 +10,7 @@ import Testimonials from '../components/sections/Testimonials.jsx'
 import Process from '../components/sections/Process.jsx'
 import Contact from '../components/sections/Contact.jsx'
 import LoadingScreen from '../components/ui/LoadingScreen.jsx'
-
+import Pricing from '../components/sections/Pricing.jsx'
 const Home = () => {
   return (
     <motion.div
@@ -26,6 +26,7 @@ const Home = () => {
         <Services />
         <Projects />
         <About />
+        <Pricing />
         <WhyUs />
         <Testimonials />
         <Process />
