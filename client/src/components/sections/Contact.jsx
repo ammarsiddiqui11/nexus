@@ -4,8 +4,8 @@ import { useInView } from 'react-intersection-observer'
 import { FiSend, FiMail, FiMapPin, FiClock, FiArrowUpRight } from 'react-icons/fi'
 import axios from 'axios'
 
-const BUDGET_OPTIONS = ['< $5k', '$5k–$15k', '$15k–$50k', '$50k+', 'Let\'s discuss']
-const SERVICE_OPTIONS = ['Web Development', 'Web Application', 'UI/UX Design', 'Backend API', 'Full-Stack Project']
+const BUDGET_OPTIONS = ['8k-12k', '12k-20k', '30k', '50k+', "Let's discuss"]
+const SERVICE_OPTIONS = ['E-Commerce Store', 'Landing Page', 'Digital Marketing', 'Local Business Setup', 'Website Revamp', 'Other']
 
 const Contact = () => {
   const { ref: titleRef, inView: titleInView } = useInView({ threshold: 0.2, triggerOnce: true })
@@ -59,6 +59,16 @@ const Contact = () => {
     transition-all duration-300
   `
 
+  // Selects need a solid dark bg so native browser dropdown options are readable
+  const selectClass = (field) => `
+    w-full bg-[#081522] border ${errors[field] ? 'border-red-500/60' : 'border-[var(--color-border)]'}
+    text-[var(--color-text-primary)]
+    font-body text-sm px-4 py-3 outline-none
+    focus:border-[var(--color-accent-primary)]
+    transition-all duration-300
+    appearance-none cursor-pointer
+  `
+
   return (
     <section id="contact" className="relative py-32 bg-[var(--color-bg-950)] overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--color-accent-primary)]/20 to-transparent" />
@@ -104,7 +114,7 @@ const Contact = () => {
             <div className="space-y-4">
               {[
                 { icon: FiMail, label: 'Email', value: 'hello@nexus.agency' },
-                { icon: FiMapPin, label: 'Location', value: 'San Francisco, CA' },
+                { icon: FiMapPin, label: 'Location', value: 'Mumbai, India' },
                 { icon: FiClock, label: 'Response Time', value: 'Within 24 hours' },
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="flex items-center gap-4 group">
@@ -190,25 +200,36 @@ const Contact = () => {
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <select
-                    name="service"
-                    value={form.service}
-                    onChange={handleChange}
-                    className={inputClass('service')}
-                  >
-                    <option value="">Service needed</option>
-                    {SERVICE_OPTIONS.map((s) => <option key={s} value={s}>{s}</option>)}
-                  </select>
+                  {/* Wrapper needed for custom arrow since we use appearance-none */}
+                  <div className="relative">
+                    <select
+                      name="service"
+                      value={form.service}
+                      onChange={handleChange}
+                      className={selectClass('service')}
+                    >
+                      <option value="" disabled>Service needed</option>
+                      {SERVICE_OPTIONS.map((s) => (
+                        <option key={s} value={s} className="bg-[#081522] text-white">{s}</option>
+                      ))}
+                    </select>
+                    <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] text-xs">▾</span>
+                  </div>
 
-                  <select
-                    name="budget"
-                    value={form.budget}
-                    onChange={handleChange}
-                    className={inputClass('budget')}
-                  >
-                    <option value="">Budget range</option>
-                    {BUDGET_OPTIONS.map((b) => <option key={b} value={b}>{b}</option>)}
-                  </select>
+                  <div className="relative">
+                    <select
+                      name="budget"
+                      value={form.budget}
+                      onChange={handleChange}
+                      className={selectClass('budget')}
+                    >
+                      <option value="" disabled>Budget range</option>
+                      {BUDGET_OPTIONS.map((b) => (
+                        <option key={b} value={b} className="bg-[#081522] text-white">{b}</option>
+                      ))}
+                    </select>
+                    <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] text-xs">▾</span>
+                  </div>
                 </div>
 
                 <div>

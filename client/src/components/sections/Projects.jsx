@@ -14,39 +14,47 @@ const PROJECTS = [
     accent: '#00d4ff',
     year: '2024',
     featured: true,
+    githubUrl: 'https://github.com/yourusername/finflow',
+    liveUrl: 'https://finflow-demo.com'
   },
   {
     id: 2,
     title: 'Luxe Commerce',
     category: 'E-Commerce Platform',
-    description: 'Premium e-commerce experience for a luxury fashion brand. Built with Next.js for SSR, Stripe integration, and a CMS-driven content layer.',
+    description: 'Premium e-commerce experience for a luxury fashion brand. Built with Next.js for SSR, stripe integration, and a CMS-driven content layer.',
     tags: ['Next.js', 'Stripe', 'Sanity CMS', 'Tailwind'],
     color: 'from-violet-500/20 to-purple-600/20',
     accent: '#8b5cf6',
     year: '2024',
     featured: true,
+    githubUrl: 'https://github.com/yourusername/luxe-commerce',
+    liveUrl: 'https://luxe-commerce-shop.com'
   },
   {
     id: 3,
-    title: 'MedTrack Pro',
-    category: 'Healthcare SaaS',
-    description: 'Patient management system for a healthcare provider. HIPAA-compliant architecture, real-time notifications, and multi-tenant infrastructure.',
+    title: 'Elite Chrono',
+    category: 'E-Commerce Platform',
+    description: 'A luxury watch store built for a smooth and modern shopping experience with smart filtering, secure checkout, and fast performance.',
     tags: ['React', 'Express', 'PostgreSQL', 'Redis'],
     color: 'from-emerald-500/20 to-teal-600/20',
     accent: '#10b981',
     year: '2023',
     featured: false,
+    githubUrl: 'https://github.com/yourusername/elite-chrono',
+    liveUrl: 'https://elite-chrono.com'
   },
   {
     id: 4,
-    title: 'BuilderOS',
-    category: 'SaaS Platform',
-    description: 'Construction project management platform with Gantt charts, resource allocation, and real-time collaboration tools for project managers.',
+    title: 'AURUM BAR & RESTRO',
+    category: 'Web Application',
+    description: 'A modern restaurant website with online reservations, menu browsing, event showcases, and an elegant user experience.',
     tags: ['Vue.js', 'Node.js', 'MongoDB', 'AWS'],
     color: 'from-orange-500/20 to-amber-600/20',
     accent: '#f59e0b',
     year: '2023',
     featured: false,
+    githubUrl: 'https://github.com/yourusername/aurum-restro',
+    liveUrl: 'https://aurum-restro.com'
   },
 ]
 
@@ -86,18 +94,26 @@ const ProjectCard = ({ project, index }) => {
             </h3>
           </div>
           <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-y-2 group-hover:translate-y-0 transform">
-            <button
+            {/* GitHub Link */}
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center border border-white/20 text-white hover:bg-white/10 transition-colors"
               aria-label="View on GitHub"
             >
               <FiGithub size={16} />
-            </button>
-            <button
+            </a>
+            {/* Live Preview Link */}
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 flex items-center justify-center border border-white/20 text-white hover:bg-white/10 transition-colors"
               aria-label="Live preview"
             >
               <FiArrowUpRight size={16} />
-            </button>
+            </a>
           </div>
         </div>
 
@@ -161,14 +177,12 @@ const Projects = () => {
               <span className="text-gradient">Speak</span>
             </motion.h2>
 
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={titleInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.3 }}
-              className="btn-outline self-start"
+            <button
+              className="btn-outline self-start flex items-center gap-2"
+              onClick={() => window.open('https://github.com/yourusername', '_blank')}
             >
               All Projects <FiArrowUpRight />
-            </motion.button>
+            </button>
           </div>
         </div>
 

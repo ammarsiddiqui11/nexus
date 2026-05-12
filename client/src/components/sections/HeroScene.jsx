@@ -1,104 +1,55 @@
-import { useRef, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Points, PointMaterial } from '@react-three/drei'
-import * as THREE from 'three'
-
-const ParticleField = () => {
-  const ref = useRef()
-  const count = 2500
-
-  const positions = useMemo(() => {
-    const pos = new Float32Array(count * 3)
-    for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 20
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 20
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 15
-    }
-    return pos
-  }, [count])
-
-  useFrame((state) => {
-    if (!ref.current) return
-    const t = state.clock.getElapsedTime()
-    ref.current.rotation.y = t * 0.04
-    ref.current.rotation.x = Math.sin(t * 0.02) * 0.1
-  })
-
-  return (
-    <Points ref={ref} positions={positions} stride={3} frustumCulled>
-      <PointMaterial
-        transparent
-        color="#00d4ff"
-        size={0.025}
-        sizeAttenuation
-        depthWrite={false}
-        opacity={0.6}
-      />
-    </Points>
-  )
-}
-
-const FloatingGrid = () => {
-  const ref = useRef()
-
-  useFrame((state) => {
-    if (!ref.current) return
-    ref.current.rotation.x = -Math.PI / 2.5
-    ref.current.position.y = -2 + Math.sin(state.clock.getElapsedTime() * 0.3) * 0.2
-  })
-
-  return (
-    <mesh ref={ref} position={[0, -2, 0]}>
-      <planeGeometry args={[30, 30, 30, 30]} />
-      <meshBasicMaterial
-        color="#00d4ff"
-        wireframe
-        transparent
-        opacity={0.06}
-      />
-    </mesh>
-  )
-}
-
-const GlowingSphere = () => {
-  const ref = useRef()
-
-  useFrame((state) => {
-    if (!ref.current) return
-    const t = state.clock.getElapsedTime()
-    ref.current.position.x = Math.sin(t * 0.4) * 3
-    ref.current.position.y = Math.cos(t * 0.3) * 1.5
-    ref.current.scale.setScalar(1 + Math.sin(t) * 0.1)
-  })
-
-  return (
-    <mesh ref={ref} position={[3, 0, -3]}>
-      <icosahedronGeometry args={[0.8, 1]} />
-      <meshBasicMaterial
-        color="#0066ff"
-        wireframe
-        transparent
-        opacity={0.3}
-      />
-    </mesh>
-  )
-}
+import React from 'react';
 
 const HeroScene = () => {
   return (
-    <div className="absolute inset-0 w-full h-full">
-      <Canvas
-        camera={{ position: [0, 0, 6], fov: 75 }}
-        gl={{ antialias: true, alpha: true }}
-        style={{ background: 'transparent' }}
-      >
-        <ambientLight intensity={0.5} />
-        <ParticleField />
-        <FloatingGrid />
-        <GlowingSphere />
-      </Canvas>
-    </div>
-  )
-}
+    <div className="absolute inset-0 w-full h-full overflow-hidden bg-[var(--color-bg-950)] pointer-events-none">
+      {/* 1. Subtle Animated Grid (SVG) */}
+      <div className="absolute inset-0 opacity-[0.15]" 
+           style={{ maskImage: 'linear-gradient(to bottom, transparent, black, transparent)' }}>
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00d4ff" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" className="animate-grid-scroll" />
+        </svg>
+      </div>
 
-export default HeroScene
+      {/* 2. Glowing Orb (CSS Blur - much faster than 3D) */}
+      <div 
+        className="absolute top-1/4 right-1/4 w-64 h-64 bg-[#0066ff] rounded-full mix-blend-screen filter blur-[80px] opacity-20 animate-float"
+      />
+      
+      {/* 3. Secondary accent glow */}
+      <div 
+        className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-[#00d4ff] rounded-full mix-blend-screen filter blur-[120px] opacity-10 animate-float-delayed"
+      />
+
+      {/* 4. Subtle Particle effect (Optional - CSS based) */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-150 contrast-150" />
+
+      <style jsx>{`
+        @keyframes grid-scroll {
+          from { transform: translateY(0); }
+          to { transform: translateY(40px); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(-20px, 20px) scale(1.1); }
+        }
+        .animate-grid-scroll {
+          animation: grid-scroll 3s linear infinite;
+        }
+        .animate-float {
+          animation: float 8s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float 12s ease-in-out infinite reverse;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default HeroScene;

@@ -1,8 +1,13 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import {
-  FiCode, FiLayout, FiServer, FiZap, FiSearch, FiSmartphone
+  FiLayout,
+  FiZap,
+  FiShoppingBag,
+  FiInstagram,
+  FiTrendingUp,
+  FiMapPin,
 } from 'react-icons/fi'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -11,51 +16,61 @@ gsap.registerPlugin(ScrollTrigger)
 
 const SERVICES = [
   {
-    icon: FiCode,
-    title: 'Web Development',
-    description: 'Full-stack websites built with modern frameworks. React, Next.js, Vue — we pick the right tool for your needs and deliver pixel-perfect results.',
-    tags: ['React', 'Next.js', 'TypeScript'],
+    icon: FiLayout,
+    title: 'Landing Pages',
+    description:
+      'Your first impression online. We build clean, fast, mobile-ready landing pages that tell your story and turn visitors into customers — no fluff, just results.',
+    tags: ['Business Websites', 'Portfolio', 'Mobile-First'],
     number: '01',
   },
   {
-    icon: FiLayout,
-    title: 'UI/UX Design',
-    description: 'Interfaces that don\'t just look beautiful — they convert. We design with intent, every pixel chosen to guide your users toward action.',
-    tags: ['Figma', 'Prototyping', 'Design Systems'],
+    icon: FiShoppingBag,
+    title: 'E-Commerce Stores',
+    description:
+      'Sell online without the headache. We set up your full online store with product listings, secure payments via Razorpay, and order management — ready to go live fast.',
+    tags: ['Online Store', 'Razorpay', 'Product Management'],
     number: '02',
   },
   {
-    icon: FiSmartphone,
-    title: 'Web Applications',
-    description: 'Complex SPAs and dashboards that handle real-world scale. From MVPs to enterprise platforms, we engineer applications that grow with you.',
-    tags: ['SPA', 'PWA', 'Real-time'],
+    icon: FiInstagram,
+    title: 'Social Media Ads',
+    description:
+      'Reach the right people on Instagram and Facebook. We create and manage targeted ad campaigns that drive real traffic to your business — not just likes.',
+    tags: ['Instagram Ads', 'Facebook Ads', 'Meta Business'],
     number: '03',
   },
   {
-    icon: FiServer,
-    title: 'Backend Development',
-    description: 'Robust APIs, microservices, and database architectures built to handle anything. Node.js, Express, MongoDB — engineered for reliability.',
-    tags: ['Node.js', 'REST API', 'MongoDB'],
+    icon: FiTrendingUp,
+    title: 'Digital Marketing',
+    description:
+      'From content strategy to monthly social posts, we handle your online presence so you can focus on running your business. Consistent, professional, and on-brand.',
+    tags: ['Social Media', 'Content Strategy', 'Monthly Plans'],
     number: '04',
   },
   {
-    icon: FiZap,
-    title: 'Performance Optimization',
-    description: 'Speed is a feature. We audit, optimize, and supercharge your existing platforms — turning sluggish experiences into instant delight.',
-    tags: ['Core Web Vitals', 'Caching', 'CDN'],
+    icon: FiMapPin,
+    title: 'Local Business Setup',
+    description:
+      'Get found on Google Maps and local searches. We set up and optimise your Google Business Profile so customers nearby can find you, call you, and visit you.',
+    tags: ['Google Business', 'Local SEO', 'Google Maps'],
     number: '05',
   },
   {
-    icon: FiSearch,
-    title: 'SEO Architecture',
-    description: 'Visibility baked in from day one. Semantic HTML, structured data, lightning fast pages, and technical SEO that actually moves the needle.',
-    tags: ['Technical SEO', 'Schema', 'Analytics'],
+    icon: FiZap,
+    title: 'Website Revamp',
+    description:
+      'Already have a website that feels outdated or slow? We audit, redesign, and optimise it — better speed, better look, better conversions.',
+    tags: ['Redesign', 'Performance', 'Core Web Vitals'],
     number: '06',
   },
 ]
 
 const ServiceCard = ({ service, index }) => {
-  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  })
+
   const Icon = service.icon
 
   return (
@@ -63,8 +78,12 @@ const ServiceCard = ({ service, index }) => {
       ref={ref}
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="group relative glass glass-hover p-8 flex flex-col gap-6 cursor-default"
+      transition={{
+        duration: 0.7,
+        delay: index * 0.1,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      }}
+      className="group relative glass glass-hover p-8 flex flex-col gap-6 cursor-default h-full min-h-[420px] transition-all duration-300"
     >
       {/* Number */}
       <span className="font-mono text-xs text-[var(--color-text-muted)] absolute top-6 right-6">
@@ -72,26 +91,30 @@ const ServiceCard = ({ service, index }) => {
       </span>
 
       {/* Icon */}
-      <div className="w-12 h-12 flex items-center justify-center border border-[var(--color-border)] group-hover:border-[var(--color-accent-primary)] group-hover:bg-[var(--color-accent-glow)] transition-all duration-300">
-        <Icon className="text-[var(--color-accent-primary)]" size={20} />
+      <div className="w-12 h-12 flex items-center justify-center border border-[var(--color-border)] group-hover:border-[var(--color-accent-primary)] group-hover:bg-[var(--color-accent-glow)] transition-all duration-300 shrink-0">
+        <Icon
+          className="text-[var(--color-accent-primary)]"
+          size={20}
+        />
       </div>
 
       {/* Content */}
-      <div className="space-y-3">
-        <h3 className="font-display text-xl font-700 text-[var(--color-text-primary)]">
+      <div className="space-y-3 flex-1">
+        <h3 className="font-display text-xl font-700 text-[var(--color-text-primary)] leading-snug">
           {service.title}
         </h3>
+
         <p className="font-body text-sm text-[var(--color-text-secondary)] leading-relaxed">
           {service.description}
         </p>
       </div>
 
       {/* Tags */}
-      <div className="flex flex-wrap gap-2 mt-auto">
+      <div className="flex flex-wrap gap-2 pt-2 mt-auto">
         {service.tags.map((tag) => (
           <span
             key={tag}
-            className="font-mono text-xs px-3 py-1 border border-[var(--color-border)] text-[var(--color-text-muted)] group-hover:border-[var(--color-accent-primary)]/30 group-hover:text-[var(--color-accent-primary)] transition-all duration-300"
+            className="font-mono text-xs px-3 py-1 border border-[var(--color-border)] text-[var(--color-text-muted)] whitespace-nowrap group-hover:border-[var(--color-accent-primary)]/30 group-hover:text-[var(--color-accent-primary)] transition-all duration-300"
           >
             {tag}
           </span>
@@ -106,7 +129,14 @@ const ServiceCard = ({ service, index }) => {
 
 const Services = () => {
   const sectionRef = useRef(null)
-  const { ref: titleRef, inView: titleInView } = useInView({ threshold: 0.2, triggerOnce: true })
+
+  const {
+    ref: titleRef,
+    inView: titleInView,
+  } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  })
 
   return (
     <section
@@ -137,7 +167,9 @@ const Services = () => {
               className="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-800 leading-tight max-w-xl"
             >
               Our Core{' '}
-              <span className="text-gradient">Services</span>
+              <span className="text-gradient">
+                Services
+              </span>
             </motion.h2>
 
             <motion.p
@@ -146,16 +178,24 @@ const Services = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="font-body text-[var(--color-text-secondary)] max-w-sm text-sm leading-relaxed"
             >
-              End-to-end digital solutions from concept to launch. Every service designed to deliver measurable results.
+              End-to-end digital solutions from concept
+              to launch. Every service designed to deliver
+              measurable results.
             </motion.p>
           </div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--color-border)]">
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--color-border)] auto-rows-fr">
           {SERVICES.map((service, index) => (
-            <div key={service.title} className="bg-[var(--color-bg-900)]">
-              <ServiceCard service={service} index={index} />
+            <div
+              key={service.title}
+              className="bg-[var(--color-bg-900)] h-full"
+            >
+              <ServiceCard
+                service={service}
+                index={index}
+              />
             </div>
           ))}
         </div>

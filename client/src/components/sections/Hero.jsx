@@ -7,10 +7,10 @@ import { Suspense, lazy } from 'react'
 const HeroScene = lazy(() => import('./HeroScene.jsx'))
 
 const STATS = [
-  { value: '150+', label: 'Projects Delivered' },
+  { value: '4+', label: 'Projects Delivered' },
   { value: '98%', label: 'Client Satisfaction' },
-  { value: '5yr', label: 'Industry Experience' },
-  { value: '40+', label: 'Happy Clients' },
+  { value: '1yr', label: 'Industry Experience' },
+  { value: '4+', label: 'Happy Clients' },
 ]
 
 const Hero = () => {
@@ -76,7 +76,7 @@ const Hero = () => {
         <div className="max-w-5xl">
           {/* Tag */}
           <div className="hero-tag section-tag mb-8 opacity-0">
-            Premium Digital Agency
+            Digital Agency
           </div>
 
           {/* Heading */}

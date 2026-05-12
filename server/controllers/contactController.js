@@ -13,18 +13,17 @@ export const submitContact = async (req, res, next) => {
     // Save to DB
     const contact = await Contact.create({ name, email, company, service, budget, message })
 
-    // Send email notification (non-blocking - don't fail if email fails)
-    try {
-      await sendContactEmail({ name, email, company, service, budget, message })
-    } catch (emailError) {
-      console.warn('[WARN] Email sending failed:', emailError.message)
-    }
-
-    return res.status(201).json({
+    // Respond to client IMMEDIATELY — don't wait for email
+    res.status(201).json({
       success: true,
-      message: 'Message received. We\'ll be in touch within 24 hours.',
+      message: "Message received. We'll be in touch within 24 hours.",
       id: contact._id,
     })
+
+    // Fire email in background after response is already sent
+    sendContactEmail({ name, email, company, service, budget, message })
+      .catch((err) => console.warn('[WARN] Email sending failed:', err.message))
+
   } catch (error) {
     next(error)
   }

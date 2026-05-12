@@ -151,7 +151,7 @@ const About = () => {
                     Currently Accepting Projects
                   </p>
                   <p className="font-mono text-xs text-[var(--color-text-muted)] mt-1">
-                    Q3 2025 slots available — 2 remaining
+                    slots available 
                   </p>
                 </div>
               </div>
