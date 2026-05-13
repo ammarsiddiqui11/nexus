@@ -1,0 +1,29 @@
+# netlify.toml — place this at the ROOT of your project (same level as package.json)
+
+[build]
+  command = "npm run build"
+  publish = "dist"                        # Vite's default output folder
+  functions = "netlify/functions"         # where your serverless functions live
+
+# Rewrite /api/contact  → netlify function
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/contact"
+  status = 200
+
+# Rewrite /api/projects and /api/projects/:id → netlify function
+[[redirects]]
+  from = "/api/projects/*"
+  to = "/.netlify/functions/projects"
+  status = 200
+
+[[redirects]]
+  from = "/api/projects"
+  to = "/.netlify/functions/projects"
+  status = 200
+
+# SPA fallback — all other routes serve index.html (required for React Router)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
