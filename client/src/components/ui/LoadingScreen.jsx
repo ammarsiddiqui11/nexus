@@ -38,7 +38,7 @@ const LoadingScreen = () => {
               transition={{ duration: 0.6 }}
               className="font-display text-6xl font-800 text-gradient"
             >
-              NEXUS
+              LeapUp
             </motion.div>
 
             <div className="w-64 mx-auto space-y-3">
