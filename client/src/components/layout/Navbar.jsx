@@ -9,8 +9,8 @@ const NAV_LINKS = [
   { label: 'Work', href: '#projects' },
   { label: 'About', href: '#about' },
   { label: 'Process', href: '#process' },
-  { label: 'Contact', href: '#contact' },
   { label: 'Pricing', href: '#pricing' },
+  { label: 'Contact', href: '#contact' },
 ]
 
 const Navbar = () => {
@@ -50,14 +50,32 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+
           {/* Logo */}
           <a
             href="#"
-            className="font-display text-xl font-800 tracking-tight"
+            className="flex items-center gap-3 group"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
           >
-            <span className="text-gradient">NEXUS</span>
-            <span className="text-[var(--color-text-muted)] font-300 ml-1">.</span>
+            {/* Logo image — place leapup-logo-dark.svg in /public/images/ */}
+            <img
+              src="/images/leapup-logo-dark.svg"
+              alt="LeapUp Digital"
+              className="h-8 w-auto object-contain"
+              onError={(e) => {
+                // Fallback to text logo if image not found
+                e.currentTarget.style.display = 'none'
+                e.currentTarget.nextElementSibling.style.display = 'flex'
+              }}
+            />
+            {/* Text fallback — hidden when image loads correctly */}
+            <span
+              className="font-display text-xl font-800 tracking-tight hidden items-center"
+              aria-hidden="true"
+            >
+              <span className="text-gradient">LeapUp Digital</span>
+              <span className="text-[var(--color-text-muted)] font-300 ml-1">.</span>
+            </span>
           </a>
 
           {/* Desktop Links */}
@@ -106,6 +124,13 @@ const Navbar = () => {
             transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
             className="fixed inset-0 z-[8999] glass flex flex-col items-center justify-center gap-8 md:hidden"
           >
+            {/* Logo in mobile menu */}
+            <img
+              src="/images/leapup-logo-dark.svg"
+              alt="LeapUp Digital"
+              className="h-10 w-auto object-contain mb-4"
+            />
+
             {NAV_LINKS.map((link, i) => (
               <motion.button
                 key={link.label}

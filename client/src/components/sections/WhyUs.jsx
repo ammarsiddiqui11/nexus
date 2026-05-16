@@ -72,7 +72,7 @@ const WhyUs = () => {
             className="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-800"
           >
             Why Teams Choose{' '}
-            <span className="text-gradient">NEXUS</span>
+            <span className="text-gradient">LeapUp Digital</span>
           </motion.h2>
         </div>
 

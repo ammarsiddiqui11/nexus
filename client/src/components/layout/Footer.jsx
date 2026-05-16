@@ -3,7 +3,7 @@ import { FiArrowUpRight, FiGithub, FiTwitter, FiLinkedin, FiInstagram } from 're
 const FOOTER_LINKS = {
   Services: ['Web Development', 'Web Applications', 'UI/UX Design', 'Backend Systems', 'SEO Optimization'],
   Company: ['About Us', 'Our Work', 'Process', 'Blog', 'Careers'],
-  Contact: ['hello@nexus.agency', '+91 8104244230', 'Mumbai, India'],
+  Contact: ['leapupdigitals@gmail.com', '+91 8104244230', 'Mumbai, India'],
 }
 
 const SOCIALS = [
@@ -22,7 +22,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2 space-y-6">
             <div className="font-display text-3xl font-800">
-              <span className="text-gradient">NEXUS</span>
+              <span className="text-gradient">LeapUp Digital</span>
               <span className="text-[var(--color-text-muted)]">.</span>
             </div>
             <p className="font-body text-sm text-[var(--color-text-secondary)] leading-relaxed max-w-sm">
@@ -73,7 +73,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 gap-4">
           <p className="font-mono text-xs text-[var(--color-text-muted)]">
-            © {new Date().getFullYear()} NEXUS Agency. All rights reserved.
+            © {new Date().getFullYear()} LeapUp Digital. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="font-mono text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent-primary)] transition-colors">

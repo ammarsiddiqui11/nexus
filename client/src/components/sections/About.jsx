@@ -67,7 +67,7 @@ const About = () => {
               animate={titleInView ? { opacity: 1, y: 0 } : {}}
               className="section-tag"
             >
-              About NEXUS
+              About LeapUp Digital
             </motion.div>
 
             <motion.h2

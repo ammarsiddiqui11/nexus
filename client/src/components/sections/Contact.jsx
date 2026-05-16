@@ -113,7 +113,7 @@ const Contact = () => {
 
             <div className="space-y-4">
               {[
-                { icon: FiMail, label: 'Email', value: 'hello@nexus.agency' },
+                { icon: FiMail, label: 'Email', value: 'leapupdigitals@gmail.com' },
                 { icon: FiMapPin, label: 'Location', value: 'Mumbai, India' },
                 { icon: FiClock, label: 'Response Time', value: 'Within 24 hours' },
               ].map(({ icon: Icon, label, value }) => (
