@@ -1,3 +1,4 @@
+// @import url('https://fonts.googleapis.com/css2?family=Syne...');
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [

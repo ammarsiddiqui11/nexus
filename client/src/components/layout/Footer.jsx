@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FiArrowUpRight, FiGithub, FiTwitter, FiLinkedin, FiInstagram } from 'react-icons/fi'
-import LegalModal from './LegalModal'
+import LegalModal from './Legalmodal'
 
 const FOOTER_LINKS = {
   Services: ['Web Development', 'Web Applications', 'UI/UX Design', 'Backend Systems', 'SEO Optimization'],
